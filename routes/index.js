@@ -65,7 +65,7 @@ router.get('/', upload.single('avatar'), function (req, res, next) {
 router.post('/insertUser', upload.single('avatar'), function (req, res) {
     var userConnect = db.model('users', user);
     userConnect({
-        avatar: req.file.filename,
+        avatar: req.file.originalname,
         username: req.body.username,
         password: req.body.password,
         name: req.body.name,
