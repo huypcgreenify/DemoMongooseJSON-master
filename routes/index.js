@@ -84,7 +84,7 @@ router.post('/insertUser', upload.single('avatar'), function (req, res) {
     })
 })
 //Sửa
-router.get('/edit/:id', function (req, res) {
+router.get('/:id', function (req, res) {
     var userConnect = db.model('users', user);
     userConnect.findOneAndUpdate({_id: req.params.id}, res.body, {new: true}, (error, docs) => {
         if (error) {
