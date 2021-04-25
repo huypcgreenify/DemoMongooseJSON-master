@@ -1,5 +1,5 @@
 <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-dark" id="mainNav">
-    <div class="container"><a class="navbar-brand" href="index.hbs">Tinder</a>
+    <div class="container"><a class="navbar-brand" href="/">Tinder</a>
         <button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right"
                 type="button" data-toogle="collapse" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
@@ -7,93 +7,76 @@
             <ul class="nav navbar-nav ml-auto text-uppercase">
                 <li class="nav-item" role="presentation"></li>
                 <li class="nav-item" role="presentation"></li>
+
             </ul>
         </div>
     </div>
 </nav>
-<header>
-
+<header class="masthead"
+        style="background-image: url(assets/img/tinderimage.png);filter: brightness(100%) contrast(100%) grayscale(0%) hue-rotate(0deg) invert(0%) sepia(0%);">
+    <div class="container">
+        <div class="intro-text"></div>
+    </div>
 </header>
 <section id="services">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="text-uppercase section-heading">Sửa user</h2>
+                <h2 class="text-uppercase section-heading">Quản lí danh sách</h2>
                 <h3 class="text-muted section-subheading"></h3>
-                <form action="/edit/{{userConnect._id}}" method="post" enctype="multipart/form-data">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>Chức năng</th>
-                                <th>Avatar</th>
-                                <th>Mã sách</th>
-                                <th>Tên sách</th>
-                                <th>Giá sách</th>
-                                <th>Loại sach</th>
-                            </tr>
-                            </thead>
-                            <tbody>
+                <div style="margin-bottom: 20px;"><label>
+                    <form action="/find" method="POST">
+                        <input placeholder="Tìm kiếm..." type="text" name="maCar"
+                               style="width: 350px;height: 40px;border-radius: 10px; margin-left: 500px;">
+                        <button class="btn btn-primary" type="submit"
+                                style="background-color: rgb(61,59,53);width: 100px;">Tìm kiếm
+                        </button>
+                    </form>
+                </label>
+                </div>
+
+                <div class="table-responsive">
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Chức năng</th>
+                            <th>Avatar</th>
+                            <th>Mã ô tô</th>
+                            <th>Nhãn hiệu</th>
+                            <th>Năm sản xuất</th>
+                            <th>Giá gốc</th>
+                            <th>Giá bán</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#each userConnect}}
                             <tr>
                                 <td>
-                                    <button class="btn btn-primary" type="submit"
-                                            style="background-color: rgb(61,59,53);width: 100px;    ">Sửa
-                                    </button>
+                                    <a class="btn btn-primary" type="button"
+                                       style="background-color: rgb(61,59,53); width: 100px"
+                                       href="/{{this.id}}">Sửa</a>
+                                    <form action="{{this._id}}" enctype="multipart/form-data" method="post">
+                                        <button class="btn btn-primary" type="submit"
+                                                style="background-color: rgb(61,59,53);width: 100px">Xóa
+                                        </button>
+                                    </form>
                                 </td>
-                                <td><input name="avatar" type="file" value="assets/img/portfolio/{{userConnect.avatar}}"
-                                           required></td>
-                                <td><label>
-                                    <input name="maSach" placeholder="Nhập mã sách"
-                                           value="{{userConnect.maSach}}">
-                                </label>
-                                </td>
-                                <td><label>
-                                    <input name="tenSach" placeholder="Nhập tên sách"
-                                           value="{{userConnect.tenSach}}">
-                                </label></td>
-                                <td><label>
-                                    <input name="giaSach" placeholder="Nhập giá sách" value="{{userConnect.giaSach}}">
-                                </label>
-                                </td>
-                                <td><label>
-                                    <!--                                    <input name="loaiSach" placeholder="Nhập loại sach"-->
-                                    <!--                                               value="{{userConnect.loaiSach}}">-->
-                                    <select name="loaiSach" id="loaiSach">
-                                        <option value="{{userConnect.loaiSach}}"> Chọn loại sách</option>
-                                        <option value="Tiểu thuyết">Tiểu thuyết</option>
-                                        <option value="Văn học">Văn học</option>
-                                        <option value="Lịch sử">Lịch sử</option>
-                                    </select>
-                                </label></td>
+                                <td><img
+                                        class="img-fluid d-block mx-auto"
+                                        style="width: 75px; height: 75px; border-radius: 5px"
+                                        src="{{this.avatar}}" alt=""></td>
+                                <!--                                <td>{{this._id}}</td>-->
+                                <td>{{this.maCar}}</td>
+                                <td>{{this.nhanHieu}}</td>
+                                <td>{{this.namSanXuat}}</td>
+                                <td>{{this.giaGoc}}</td>
+                                <td>{{this.giaBan}}</td>
                             </tr>
-                            {{#each testnodes}}
-                                <tr>
-                                    <td>
-                                        <a class="btn btn-primary" type="button"
-                                           style="background-color: rgb(61,59,53); width: 100px"
-                                           href="/{{this.id}}">Sửa</a>
-                                        <form action="{{this._id}}" enctype="multipart/form-data" method="post">
-                                            <button class="btn btn-primary" type="submit"
-                                                    style="background-color: rgb(61,59,53);width: 100px">Xóa
-                                            </button>
-                                        </form>
-                                    </td>
-                                    <td><img
-                                            class="img-fluid d-block mx-auto"
-                                            style="width: 75px; height: 75px; border-radius: 5px"
-                                            src="{{this.avatar}}" alt=""></td>
-                                    <!--                                <td>{{this._id}}</td>-->
-                                    <td>{{this.maSach}}</td>
-                                    <td>{{this.tenSach}}</td>
-                                    <td>{{this.giaSach}}</td>
-                                    <td>{{this.loaiSach}}</td>
-                                </tr>
-                            {{/each}}
-                            </tbody>
-
-                        </table>
-                    </div>
-                </form>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
 
             </div>
 
@@ -105,8 +88,7 @@
         </div>
     </div>
 </section>
-<section id="contact"
-         style="background-image: url('../../../DemoInClass/DemoMongooseJSON-master/assets/img/map-image.png');">
+<section id="contact" style="background-image: url('assets/img/map-image.png');">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -170,8 +152,7 @@
                             <div class="modal-body">
                                 <h2 class="text-uppercase">Project Name</h2>
                                 <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p><img
-                                    class="img-fluid d-block mx-auto"
-                                    src="../../../DemoInClass/DemoMongooseJSON-master/assets/img/portfolio/1-full.jpg">
+                                    class="img-fluid d-block mx-auto" src="../assets/img/portfolio/1-full.jpg" alt="">
                                 <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
                                     adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt
                                     repellat aperiam quasi sunt officia expedita beatae
@@ -201,8 +182,7 @@
                             <div class="modal-body">
                                 <h2 class="text-uppercase">Project Name</h2>
                                 <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p><img
-                                    class="img-fluid d-block mx-auto"
-                                    src="../../../DemoInClass/DemoMongooseJSON-master/assets/img/portfolio/2-full.jpg">
+                                    class="img-fluid d-block mx-auto" src="../assets/img/portfolio/2-full.jpg" alt="">
                                 <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
                                     adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt
                                     repellat aperiam quasi sunt officia expedita beatae
@@ -232,8 +212,7 @@
                             <div class="modal-body">
                                 <h2 class="text-uppercase">Project Name</h2>
                                 <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p><img
-                                    class="img-fluid d-block mx-auto"
-                                    src="../../../DemoInClass/DemoMongooseJSON-master/assets/img/portfolio/3-full.jpg">
+                                    class="img-fluid d-block mx-auto" src="../assets/img/portfolio/3-full.jpg" alt="">
                                 <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
                                     adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt
                                     repellat aperiam quasi sunt officia expedita beatae
@@ -263,8 +242,7 @@
                             <div class="modal-body">
                                 <h2 class="text-uppercase">Project Name</h2>
                                 <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p><img
-                                    class="img-fluid d-block mx-auto"
-                                    src="../../../DemoInClass/DemoMongooseJSON-master/assets/img/portfolio/4-full.jpg">
+                                    class="img-fluid d-block mx-auto" src="../assets/img/portfolio/4-full.jpg" alt="">
                                 <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
                                     adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt
                                     repellat aperiam quasi sunt officia expedita beatae
@@ -294,8 +272,7 @@
                             <div class="modal-body">
                                 <h2 class="text-uppercase">Project Name</h2>
                                 <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p><img
-                                    class="img-fluid d-block mx-auto"
-                                    src="../../../DemoInClass/DemoMongooseJSON-master/assets/img/portfolio/5-full.jpg">
+                                    class="img-fluid d-block mx-auto" src="../assets/img/portfolio/5-full.jpg" alt="">
                                 <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
                                     adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt
                                     repellat aperiam quasi sunt officia expedita beatae
@@ -325,8 +302,7 @@
                             <div class="modal-body">
                                 <h2 class="text-uppercase">Project Name</h2>
                                 <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p><img
-                                    class="img-fluid d-block mx-auto"
-                                    src="../../../DemoInClass/DemoMongooseJSON-master/assets/img/portfolio/6-full.jpg">
+                                    class="img-fluid d-block mx-auto" src="../assets/img/portfolio/6-full.jpg" alt="">
                                 <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
                                     adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt
                                     repellat aperiam quasi sunt officia expedita beatae

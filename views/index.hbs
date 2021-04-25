@@ -18,15 +18,21 @@
         <div class="intro-text"></div>
     </div>
 </header>
+
 <section id="services">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="text-uppercase section-heading">Quản lí user</h2>
+                <h2 class="text-uppercase section-heading">Quản lí danh sách</h2>
                 <h3 class="text-muted section-subheading"></h3>
                 <div style="margin-bottom: 20px;"><label>
-                    <input placeholder="Tìm kiếm user..." type="text"
-                           style="width: 350px;height: 40px;border-radius: 10px; margin-left: 700px;">
+                    <form action="/find" method="POST">
+                        <input placeholder="Tìm kiếm..." type="text" name="maCar"
+                               style="width: 350px;height: 40px;border-radius: 10px; margin-left: 500px;">
+                        <button class="btn btn-primary" type="submit"
+                                style="background-color: rgb(61,59,53);width: 100px;">Tìm kiếm
+                        </button>
+                    </form>
                 </label>
                 </div>
 
@@ -36,12 +42,11 @@
                         <thead>
                         <tr>
                             <th>Chức năng</th>
-                            <th>Avatar</th>
-                            <th>Tài khoản</th>
-                            <th>Mật khẩu</th>
-                            <th>Họ và tên</th>
-                            <th>Địa chỉ</th>
-                            <th>SĐT & Email</th>
+                            <th style="collapse: 2">Avatar</th>
+                            <th>Mã sách</th>
+                            <th>Tên sách</th>
+                            <th>Giá sách</th>
+                            <th>Loại sach</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -54,53 +59,57 @@
                                     </button>
 
                                 </td>
-                                <td><input name="avatar" type="file"></td>
+                                <td><input name="avatar" type="file" required multiple></td>
                                 <td><label>
-                                    <input name="username" placeholder="Enter username" style="border-radius: 20px">
+                                    <input name="maSach" placeholder="Nhập mã sách" style="border-radius: 20px"
+                                           required>
                                 </label>
                                 </td>
                                 <td><label>
-                                    <input name="password" placeholder="Enter password" type="password"
-                                           style="border-radius: 20px">
+                                    <input name="tenSach" placeholder="Nhập tên sách"
+                                           style="border-radius: 20px" required>
                                 </label></td>
                                 <td><label>
-                                    <input name="name" placeholder="Enter name" style="border-radius: 20px">
+                                    <input name="giaSach" placeholder="Nhập giá sách" style="border-radius: 20px"
+                                           type="number" required>
                                 </label></td>
                                 <td><label>
-                                    <input name="address" placeholder="Enter address" style="border-radius: 20px">
-                                </label></td>
-                                <td><label>
-                                    <input name="number_phone" placeholder="Enter number phone"
-                                           style="border-radius: 20px">
+                                    <!--                                    <input name="loaiSach" placeholder="Nhập loại sách"-->
+                                    <!--                                           style="border-radius: 20px" type="number">-->
+                                    <select name="loaiSach" id="loaiSach" required>
+                                        <option value="loaiSach"> Chọn loại sách</option>
+                                        <option value="Tiểu thuyết">Tiểu thuyết</option>
+                                        <option value="Văn học">Văn học</option>
+                                        <option value="Lịch sử">Lịch sử</option>
+                                    </select>
                                 </label></td>
 
                             </tr>
                         </form>
-                        {{#each users}}
+                        {{#each testnodes}}
                             <tr>
                                 <td>
-
                                     <a class="btn btn-primary" type="button"
                                        style="background-color: rgb(61,59,53); width: 100px"
                                        href="/{{this.id}}">Sửa</a>
-
-
                                     <form action="{{this._id}}" enctype="multipart/form-data" method="post">
                                         <button class="btn btn-primary" type="submit"
                                                 style="background-color: rgb(61,59,53);width: 100px">Xóa
                                         </button>
                                     </form>
                                 </td>
-                                <td><img
-                                        class="img-fluid d-block mx-auto"
-                                        style="width: 75px; height: 75px; border-radius: 5px"
-                                        src="assets/img/portfolio/{{this.avatar}}" alt=""></td>
+                                <td>
+                                    {{#each this.avatar}}
+                                        <img
+                                                class="img-fluid d-block mx-auto"
+                                                style="width: 75px; height: 75px; border-radius: 5px"
+                                                src="{{this}}" alt="">{{/each}}
+                                </td>
                                 <!--                                <td>{{this._id}}</td>-->
-                                <td>{{this.username}}</td>
-                                <td>{{this.password}}</td>
-                                <td>{{this.name}}</td>
-                                <td>{{this.address}}</td>
-                                <td>{{this.number_phone}}</td>
+                                <td>{{this.maSach}}</td>
+                                <td>{{this.tenSach}}</td>
+                                <td>{{this.giaSach}}</td>
+                                <td>{{this.loaiSach}}</td>
                             </tr>
                         {{/each}}
                         </tbody>
